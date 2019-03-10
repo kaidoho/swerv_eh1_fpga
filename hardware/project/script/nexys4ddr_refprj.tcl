@@ -37,6 +37,11 @@
 #
 #*****************************************************************************************
 
+#Retrieve the project path
+set prjPath [lindex $argv 0]
+set swervHwPath [lindex $argv 1]
+
+
 # Set the reference directory for source file relative paths (by default the value is script directory path)
 set origin_dir "."
 
@@ -105,7 +110,7 @@ if { $::argc > 0 } {
 set orig_proj_dir "[file normalize "$origin_dir/"]"
 
 # Create project
-create_project ${_xil_proj_name_} ./${_xil_proj_name_} -part xc7a100tcsg324-1
+create_project ${_xil_proj_name_} ${prjPath} -part xc7a100tcsg324-1
 
 # Set the directory path for the new project
 set proj_dir [get_property directory [current_project]]
@@ -159,291 +164,291 @@ if {[string equal [get_filesets -quiet sources_1] ""]} {
 # Set 'sources_1' fileset object
 set obj [get_filesets sources_1]
 set files [list \
- [file normalize "${origin_dir}/../../swerv_eh1/configs/snapshots/default/common_defines.vh"] \
- [file normalize "${origin_dir}/../../swerv_eh1/configs/snapshots/default/pd_defines.vh"] \
+ [file normalize "${swervHwPath}/configs/snapshots/default/common_defines.vh"] \
+ [file normalize "${swervHwPath}/configs/snapshots/default/pd_defines.vh"] \
  [file normalize "${origin_dir}/../../peripherals/bd/axi_intc/hdl/axi_intc_wrapper.v"] \
  [file normalize "${origin_dir}/../../peripherals/bd/clk_and_rst/hdl/clk_and_rst_wrapper.v"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/dmi/dmi_jtag_to_core_sync.v"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/dmi/dmi_wrapper.v"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/dmi/double_flop_sync.v"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/dmi/toggle_sync.v"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lib/beh_lib.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/include/global.h"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/dbg/dbg.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/include/def.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/dec/dec.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/dec/dec_decode_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/dec/dec_gpr_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/dec/dec_ib_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/dec/dec_tlu_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/dec/dec_trigger.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/dma_ctrl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/exu/exu.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/exu/exu_alu_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/exu/exu_div_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/exu/exu_mul_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/ifu/ifu.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/ifu/ifu_aln_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/ifu/ifu_bp_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/ifu/ifu_compress_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/ifu/ifu_ic_mem.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/ifu/ifu_ifc_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/ifu/ifu_mem_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lsu/lsu.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lsu/lsu_addrcheck.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lsu/lsu_bus_intf.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lsu/lsu_bus_read_buffer.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lsu/lsu_bus_write_buffer.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lsu/lsu_clkdomain.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lsu/lsu_dccm_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lsu/lsu_dccm_mem.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lsu/lsu_ecc.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lsu/lsu_lsc_ctl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lsu/lsu_stbuf.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lsu/lsu_trigger.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/mem.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lib/mem_lib.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/configs/snapshots/default/pic_map_auto.h"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/pic_ctrl.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/dmi/rvjtag_tap.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/swerv.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/swerv_wrapper.sv"] \
+ [file normalize "${swervHwPath}/design/dmi/dmi_jtag_to_core_sync.v"] \
+ [file normalize "${swervHwPath}/design/dmi/dmi_wrapper.v"] \
+ [file normalize "${swervHwPath}/design/dmi/double_flop_sync.v"] \
+ [file normalize "${swervHwPath}/design/dmi/toggle_sync.v"] \
+ [file normalize "${swervHwPath}/design/lib/beh_lib.sv"] \
+ [file normalize "${swervHwPath}/design/include/global.h"] \
+ [file normalize "${swervHwPath}/design/dbg/dbg.sv"] \
+ [file normalize "${swervHwPath}/design/include/def.sv"] \
+ [file normalize "${swervHwPath}/design/dec/dec.sv"] \
+ [file normalize "${swervHwPath}/design/dec/dec_decode_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/dec/dec_gpr_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/dec/dec_ib_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/dec/dec_tlu_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/dec/dec_trigger.sv"] \
+ [file normalize "${swervHwPath}/design/dma_ctrl.sv"] \
+ [file normalize "${swervHwPath}/design/exu/exu.sv"] \
+ [file normalize "${swervHwPath}/design/exu/exu_alu_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/exu/exu_div_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/exu/exu_mul_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/ifu/ifu.sv"] \
+ [file normalize "${swervHwPath}/design/ifu/ifu_aln_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/ifu/ifu_bp_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/ifu/ifu_compress_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/ifu/ifu_ic_mem.sv"] \
+ [file normalize "${swervHwPath}/design/ifu/ifu_ifc_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/ifu/ifu_mem_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/lsu/lsu.sv"] \
+ [file normalize "${swervHwPath}/design/lsu/lsu_addrcheck.sv"] \
+ [file normalize "${swervHwPath}/design/lsu/lsu_bus_intf.sv"] \
+ [file normalize "${swervHwPath}/design/lsu/lsu_bus_read_buffer.sv"] \
+ [file normalize "${swervHwPath}/design/lsu/lsu_bus_write_buffer.sv"] \
+ [file normalize "${swervHwPath}/design/lsu/lsu_clkdomain.sv"] \
+ [file normalize "${swervHwPath}/design/lsu/lsu_dccm_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/lsu/lsu_dccm_mem.sv"] \
+ [file normalize "${swervHwPath}/design/lsu/lsu_ecc.sv"] \
+ [file normalize "${swervHwPath}/design/lsu/lsu_lsc_ctl.sv"] \
+ [file normalize "${swervHwPath}/design/lsu/lsu_stbuf.sv"] \
+ [file normalize "${swervHwPath}/design/lsu/lsu_trigger.sv"] \
+ [file normalize "${swervHwPath}/design/mem.sv"] \
+ [file normalize "${swervHwPath}/design/lib/mem_lib.sv"] \
+ [file normalize "${swervHwPath}/configs/snapshots/default/pic_map_auto.h"] \
+ [file normalize "${swervHwPath}/design/pic_ctrl.sv"] \
+ [file normalize "${swervHwPath}/design/dmi/rvjtag_tap.sv"] \
+ [file normalize "${swervHwPath}/design/swerv.sv"] \
+ [file normalize "${swervHwPath}/design/swerv_wrapper.sv"] \
  [file normalize "${origin_dir}/../../design_top/swerv_eh1_reference_design.v"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lib/ahb_to_axi4.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/lib/axi4_to_ahb.sv"] \
- [file normalize "${origin_dir}/../../swerv_eh1/design/ifu/ifu_iccm_mem.sv"] \
+ [file normalize "${swervHwPath}/design/lib/ahb_to_axi4.sv"] \
+ [file normalize "${swervHwPath}/design/lib/axi4_to_ahb.sv"] \
+ [file normalize "${swervHwPath}/design/ifu/ifu_iccm_mem.sv"] \
 ]
 add_files -norecurse -fileset $obj $files
 
 # Set 'sources_1' fileset file properties for remote files
-set file "$origin_dir/../../swerv_eh1/configs/snapshots/default/common_defines.vh"
+set file "$swervHwPath/configs/snapshots/default/common_defines.vh"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "Verilog Header" -objects $file_obj
 set_property -name "is_global_include" -value "1" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/configs/snapshots/default/pd_defines.vh"
+set file "$swervHwPath/configs/snapshots/default/pd_defines.vh"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "Verilog Header" -objects $file_obj
 set_property -name "is_global_include" -value "1" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lib/beh_lib.sv"
+set file "$swervHwPath/design/lib/beh_lib.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/include/global.h"
+set file "$swervHwPath/design/include/global.h"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "Verilog Header" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/dbg/dbg.sv"
+set file "$swervHwPath/design/dbg/dbg.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/include/def.sv"
+set file "$swervHwPath/design/include/def.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/dec/dec.sv"
+set file "$swervHwPath/design/dec/dec.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/dec/dec_decode_ctl.sv"
+set file "$swervHwPath/design/dec/dec_decode_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/dec/dec_gpr_ctl.sv"
+set file "$swervHwPath/design/dec/dec_gpr_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/dec/dec_ib_ctl.sv"
+set file "$swervHwPath/design/dec/dec_ib_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/dec/dec_tlu_ctl.sv"
+set file "$swervHwPath/design/dec/dec_tlu_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/dec/dec_trigger.sv"
+set file "$swervHwPath/design/dec/dec_trigger.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/dma_ctrl.sv"
+set file "$swervHwPath/design/dma_ctrl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/exu/exu.sv"
+set file "$swervHwPath/design/exu/exu.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/exu/exu_alu_ctl.sv"
+set file "$swervHwPath/design/exu/exu_alu_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/exu/exu_div_ctl.sv"
+set file "$swervHwPath/design/exu/exu_div_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/exu/exu_mul_ctl.sv"
+set file "$swervHwPath/design/exu/exu_mul_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/ifu/ifu.sv"
+set file "$swervHwPath/design/ifu/ifu.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/ifu/ifu_aln_ctl.sv"
+set file "$swervHwPath/design/ifu/ifu_aln_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/ifu/ifu_bp_ctl.sv"
+set file "$swervHwPath/design/ifu/ifu_bp_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/ifu/ifu_compress_ctl.sv"
+set file "$swervHwPath/design/ifu/ifu_compress_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/ifu/ifu_ic_mem.sv"
+set file "$swervHwPath/design/ifu/ifu_ic_mem.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/ifu/ifu_ifc_ctl.sv"
+set file "$swervHwPath/design/ifu/ifu_ifc_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/ifu/ifu_mem_ctl.sv"
+set file "$swervHwPath/design/ifu/ifu_mem_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lsu/lsu.sv"
+set file "$swervHwPath/design/lsu/lsu.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lsu/lsu_addrcheck.sv"
+set file "$swervHwPath/design/lsu/lsu_addrcheck.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lsu/lsu_bus_intf.sv"
+set file "$swervHwPath/design/lsu/lsu_bus_intf.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lsu/lsu_bus_read_buffer.sv"
+set file "$swervHwPath/design/lsu/lsu_bus_read_buffer.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lsu/lsu_bus_write_buffer.sv"
+set file "$swervHwPath/design/lsu/lsu_bus_write_buffer.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lsu/lsu_clkdomain.sv"
+set file "$swervHwPath/design/lsu/lsu_clkdomain.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lsu/lsu_dccm_ctl.sv"
+set file "$swervHwPath/design/lsu/lsu_dccm_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lsu/lsu_dccm_mem.sv"
+set file "$swervHwPath/design/lsu/lsu_dccm_mem.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lsu/lsu_ecc.sv"
+set file "$swervHwPath/design/lsu/lsu_ecc.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lsu/lsu_lsc_ctl.sv"
+set file "$swervHwPath/design/lsu/lsu_lsc_ctl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lsu/lsu_stbuf.sv"
+set file "$swervHwPath/design/lsu/lsu_stbuf.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lsu/lsu_trigger.sv"
+set file "$swervHwPath/design/lsu/lsu_trigger.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/mem.sv"
+set file "$swervHwPath/design/mem.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lib/mem_lib.sv"
+set file "$swervHwPath/design/lib/mem_lib.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/configs/snapshots/default/pic_map_auto.h"
+set file "$swervHwPath/configs/snapshots/default/pic_map_auto.h"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "Verilog Header" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/pic_ctrl.sv"
+set file "$swervHwPath/design/pic_ctrl.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/dmi/rvjtag_tap.sv"
+set file "$swervHwPath/design/dmi/rvjtag_tap.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/swerv.sv"
+set file "$swervHwPath/design/swerv.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/swerv_wrapper.sv"
+set file "$swervHwPath/design/swerv_wrapper.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lib/ahb_to_axi4.sv"
+set file "$swervHwPath/design/lib/ahb_to_axi4.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/lib/axi4_to_ahb.sv"
+set file "$swervHwPath/design/lib/axi4_to_ahb.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "$origin_dir/../../swerv_eh1/design/ifu/ifu_iccm_mem.sv"
+set file "$swervHwPath/design/ifu/ifu_iccm_mem.sv"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
@@ -454,7 +459,7 @@ set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
 # Set 'sources_1' fileset properties
 set obj [get_filesets sources_1]
-set_property -name "include_dirs" -value "[file normalize "$origin_dir/../../swerv_eh1/design/include"] [file normalize "$origin_dir/../../swerv_eh1/configs/snapshots/default"]" -objects $obj
+set_property -name "include_dirs" -value "[file normalize "$swervHwPath/design/include"] [file normalize "$swervHwPath/configs/snapshots/default"]" -objects $obj
 set_property -name "top" -value "swerv_eh1_reference_design" -objects $obj
 set_property -name "top_auto_set" -value "0" -objects $obj
 
