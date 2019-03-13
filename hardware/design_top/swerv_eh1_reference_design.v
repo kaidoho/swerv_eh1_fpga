@@ -19,6 +19,7 @@ module swerv_eh1_reference_design(
  		output 				led_0,
  		output 				led_1,
  		output 				led_2,
+ 		output 				led_3,
 		// UART pins
 		output				uart_txd,
 		input 				uart_rxd,
@@ -49,6 +50,7 @@ module swerv_eh1_reference_design(
    	wire [2:0]  trace_rv_i_interrupt_ip;
    	wire [31:0] trace_rv_i_tval_ip;
 
+    wire locked_clk;
    	// Bus signals
 
    	//-------------------------- LSU AXI signals--------------------------
@@ -669,7 +671,7 @@ module swerv_eh1_reference_design(
 
         
 OBUF led_0_obuf (.O(led_0), .I(rst_n));       
-OBUF led_1_obuf (.O(led_1), .I(peripheral_aresetn));       
-OBUF led_2_obuf (.O(led_2), .I(interconnect_aresetn)); 
-
+OBUF led_1_obuf (.O(led_1), .I(cpu_reset));       
+OBUF led_2_obuf (.O(led_2), .I(locked_clk)); 
+OBUF led_3_obuf (.O(led_3), .I(reset)); 
 endmodule

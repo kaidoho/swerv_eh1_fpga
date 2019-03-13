@@ -59,6 +59,8 @@ set orig_proj_dir "[file normalize "$localSrcPath/"]"
 # Create project
 create_project ${_xil_proj_name_} ${prjPath} -part xc7a100tcsg324-1
 
+
+
 # Set the directory path for the new project
 set proj_dir [get_property directory [current_project]]
 
@@ -67,6 +69,8 @@ set proj_dir [get_property directory [current_project]]
 
 # Set project properties
 set obj [current_project]
+
+
 set_property -name "board_part" -value "digilentinc.com:arty-a7-100:part0:1.0" -objects $obj
 set_property -name "board_part_repo_paths" -value [get_param board.repoPaths] -objects $obj
 set_property -name "default_lib" -value "xil_defaultlib" -objects $obj
@@ -102,6 +106,8 @@ set_property -name "webtalk.vcs_export_sim" -value "2" -objects $obj
 set_property -name "webtalk.xcelium_export_sim" -value "2" -objects $obj
 set_property -name "webtalk.xsim_export_sim" -value "2" -objects $obj
 set_property -name "xpm_libraries" -value "XPM_CDC XPM_MEMORY" -objects $obj
+
+
 
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
@@ -420,14 +426,18 @@ set obj [get_filesets constrs_1]
 
 # Add/Import constrs file and set constrs file properties
 set file "[file normalize "${localSrcPath}/hardware/constraints/${boardName}.xdc"]"
-set file_added [add_files -norecurse -fileset $obj [list $file]]
-set file "${localSrcPath}/hardware/constraints/${boardName}.xdc"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
-set_property -name "file_type" -value "XDC" -objects $file_obj
+
+set files [list [file normalize "${localSrcPath}/hardware/constraints/${boardName}.xdc"] \
+	        [file normalize "${localSrcPath}/hardware/constraints/config.xdc"]]
+
+set files_added [add_files -norecurse -fileset $obj $files]
+#set file "${localSrcPath}/hardware/constraints/${boardName}.xdc"
+#set file [file normalize $file]
+#set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
+#set_property -name "file_type" -value "XDC" -objects $file_obj
 
 # Set 'constrs_1' fileset properties
-set obj [get_filesets constrs_1]
+#set obj [get_filesets constrs_1]
 
 # Create 'sim_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sim_1] ""]} {
@@ -811,7 +821,7 @@ proc cr_bd_clk_and_rst { parentCell } {
   set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
   set_property -dict [ list \
    CONFIG.RESET_BOARD_INTERFACE {reset} \
- ] $proc_sys_reset_0
+ ] $proc_sys_reset_0                           
 
   # Create port connections
   connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_ports clk_out1_0] [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins proc_sys_reset_0/slowest_sync_clk]
